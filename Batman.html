@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connor Message</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 16px;
+      background: radial-gradient(circle at center, #222 0%, #000 70%);
+      font-family: Arial, sans-serif;
+      color: #f5c518;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    /* SVG / Name */
+    svg {
+      width: 90vw;
+      max-width: 420px;
+      margin-bottom: 16px;
+    }
+
+    text {
+      fill: #f5c518;
+      font-size: 10vw;
+      max-font-size: 72px;
+      letter-spacing: 0.15em;
+      user-select: none;
+      filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.8));
+      transition: opacity 0.6s ease;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      max-width: 320px;
+      background-color: #f5c518;
+      border: none;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #000;
+      box-shadow: 0 0 10px rgba(245, 197, 24, 0.8);
+      margin-bottom: 16px;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Message box */
+    #message {
+      width: 100%;
+      max-width: 600px;
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 140px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(245, 197, 24, 0.1);
+      box-shadow: 0 0 15px rgba(245, 197, 24, 0.4);
+      white-space: pre-wrap;
+      transform-origin: center;
+    }
+
+    /* Ball up animation */
+    .ball-up {
+      animation: ballUp 0.6s forwards;
+    }
+
+    @keyframes ballUp {
+      0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(0.4) rotate(15deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(0) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Extra tweak for very small phones */
+    @media (max-width: 360px) {
+      text {
+        font-size: 12vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <text id="logoText" x="400" y="230" text-anchor="middle">
+      CONNOR
+    </text>
+  </svg>
+
+  <button id="clickBtn">Click Me</button>
+
+  <div id="message"></div>
+
+  <script>
+    const btn = document.getElementById('clickBtn');
+    const messageDiv = document.getElementById('message');
+    const logoText = document.getElementById('logoText');
+
+    const fullMessage = `Hello, Connor! Thank you for clicking on me! I definitely know how I come off, but I really just want to get to know you as a friend. This upcoming year is definitely going to be my busiest, most focused year yet. I have a habit of finding interest in characters I want to be like, and you are definitely the first real person — not a movie character — I've found interest in. Please don’t take offense or avoid me — I just want to be your friend and get to know you better.
+
+Please don’t take it as if I haven’t had any interest in you before. I’m just finally using my brain — it’s been sitting on the shelf for a while. Please reach out because I would really like to get to know you.
+
+Between you and me though, I’m kind of rejoicing that you’re real.`;
+
+    function typeMessage(text, speed = 30) {
+      let index = 0;
+      messageDiv.textContent = '';
+      messageDiv.classList.remove('ball-up');
+
+      const interval = setInterval(() => {
+        messageDiv.textContent += text.charAt(index);
+        index++;
+        if (index >= text.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            messageDiv.classList.add('ball-up');
+            setTimeout(() => {
+              messageDiv.textContent = '';
+              messageDiv.classList.remove('ball-up');
+              fadeChangeText('FROM BATGIRL');
+              btn.disabled = false;
+            }, 600);
+          }, 1200);
+        }
+      }, speed);
+    }
+
+    function fadeChangeText(newText) {
+      logoText.style.opacity = '0';
+      setTimeout(() => {
+        logoText.textContent = newText;
+        logoText.style.opacity = '1';
+      }, 600);
+    }
+
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+      typeMessage(fullMessage);
+    });
+  </script>
+
+</body>
+</html>
