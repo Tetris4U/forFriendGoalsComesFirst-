@@ -3,120 +3,426 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Connor Message</title>
-
+  <title>Batman Style Tabs: Goals, Fears & Rules</title>
   <style>
     body {
       margin: 0;
-      padding: 16px;
-      background: radial-gradient(circle at center, #222 0%, #000 70%);
-      font-family: Arial, sans-serif;
-      color: #f5c518;
+      padding: 0;
+      background: #0b0c10; /* very dark blue/black */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #d4d4d4; /* light gray text */
+      height: 100vh;
+      overflow: hidden; /* prevent page scroll */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      background: #1f2833; /* dark slate */
+      padding: 2rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(255, 223, 0, 0.5); /* glowing yellow shadow */
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      user-select: none;
+      z-index: 10;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      gap: 1.5rem;
+      border: 2px solid #ffc107; /* Batman yellow border */
       box-sizing: border-box;
+
+      max-height: 90vh;       /* limit height for scrolling */
+      overflow-y: scroll;     /* enable vertical scroll */
+      scrollbar-width: none;  /* Firefox hide scrollbar */
+      -ms-overflow-style: none; /* IE and Edge hide scrollbar */
     }
 
-    /* SVG / Name */
-    svg {
-      width: 90vw;
-      max-width: 420px;
-      margin-bottom: 16px;
+    /* Hide scrollbar Chrome, Safari and Edge */
+    .container::-webkit-scrollbar {
+      display: none;
     }
 
-    text {
-      fill: #f5c518;
-      font-size: 10vw;
-      max-font-size: 72px;
-      letter-spacing: 0.15em;
+    .jump-title {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1.4px;
+      font-weight: 700;
       user-select: none;
-      filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.8));
-      transition: opacity 0.6s ease;
+      color: #ffc107; /* Batman yellow */
+      text-shadow: 0 0 6px #ffc107, 0 0 12px #ffeb3b;
     }
 
-    /* Button */
-    button {
-      width: 100%;
-      max-width: 320px;
-      background-color: #f5c518;
+    .batman-mentality {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffc107;
+      text-shadow: 0 0 6px #ffc107;
+      letter-spacing: 1.1px;
+      margin: 0 0 0.5rem 0;
+      user-select: none;
+    }
+
+    .mentality-text {
+      color: #c5c6c7;
+      font-weight: 500;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+      letter-spacing: 0.6px;
+      user-select: none;
+    }
+
+    .jump-title span {
+      display: inline-block;
+      animation: jump 0.6s ease-in-out infinite;
+      cursor: default;
+    }
+
+    .jump-title span:nth-child(1) { animation-delay: 0s; }
+    .jump-title span:nth-child(2) { animation-delay: 0.15s; }
+    .jump-title span:nth-child(3) { animation-delay: 0.3s; }
+    .jump-title span:nth-child(4) { animation-delay: 0.45s; }
+
+    @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .tab-button {
+      background: #ffc107; /* Batman yellow */
       border: none;
-      padding: 14px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 8px;
+      padding: 0.6rem 1.6rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      color: #1f2833; /* dark slate text on yellow */
       cursor: pointer;
-      color: #000;
-      box-shadow: 0 0 10px rgba(245, 197, 24, 0.8);
-      margin-bottom: 16px;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.7);
+      transition: background-color 0.3s ease;
+      user-select: none;
+      font-weight: 600;
+      flex: 1;
+      text-shadow: none;
+      white-space: nowrap;
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .tab-button:hover {
+      background: #ffca28;
     }
 
-    /* Message box */
-    #message {
-      width: 100%;
-      max-width: 600px;
-      font-size: 16px;
+    .tab-button.active {
+      background: #ffb300;
+      box-shadow: 0 6px 15px rgba(255, 193, 7, 0.9);
+    }
+
+    /* Content sections */
+    .tab-content {
+      text-align: left;
+      color: #c5c6c7; /* lighter gray */
+      font-weight: 600;
+      font-size: 1.1rem;
       line-height: 1.5;
-      min-height: 140px;
-      padding: 14px;
+      letter-spacing: 0.7px;
+      padding-right: 0.8rem;
+      flex-grow: 1;
+      word-wrap: break-word;
+    }
+
+    .tab-content ul {
+      padding-left: 1.4rem;
+      margin: 0;
+    }
+
+    .tab-content ul li {
+      margin-bottom: 0.9rem;
+      position: relative;
+    }
+
+    .tab-content ul li::before {
+      content: "✔";
+      color: #ffc107; /* Batman yellow check */
+      position: absolute;
+      left: -1.2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      top: 0;
+      line-height: 1;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Paragraph style for fears */
+    .tab-content p {
+      font-weight: 600;
+      color: #c5c6c7;
+      margin: 0 0 1rem 0;
+      padding-left: 0.4rem;
+      font-style: italic;
+    }
+
+    /* Login form */
+    form.login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #c5c6c7;
+      position: relative;
+    }
+
+    form.login-form label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    form.login-form input[type="text"],
+    form.login-form input[type="password"] {
+      padding: 0.5rem 0.8rem;
+      border: 2px solid #ffc107;
       border-radius: 10px;
-      background: rgba(245, 197, 24, 0.1);
-      box-shadow: 0 0 15px rgba(245, 197, 24, 0.4);
-      white-space: pre-wrap;
-      transform-origin: center;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #1f2833;
+      transition: border-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: #c5c6c7;
     }
 
-    /* Ball up animation */
-    .ball-up {
-      animation: ballUp 0.6s forwards;
+    form.login-form input[type="text"]:focus,
+    form.login-form input[type="password"]:focus {
+      outline: none;
+      border-color: #ffeb3b;
+      box-shadow: 0 0 8px #ffeb3b;
+      background-color: #fffde7;
     }
 
-    @keyframes ballUp {
-      0% {
-        transform: scale(1) rotate(0deg);
+    form.login-form button {
+      align-self: center;
+      padding: 0.6rem 1.6rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      background: #ffc107;
+      color: #1f2833;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 193, 7, 0.7);
+      transition: background-color 0.3s ease;
+      font-weight: 700;
+      margin-top: 0.3rem;
+      width: 100%;
+    }
+
+    form.login-form button:hover {
+      background: #ffca28;
+    }
+
+    /* ACCESS DENIED message */
+    .access-denied {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ff3b3b;
+      font-weight: 900;
+      font-size: 1.4rem;
+      text-shadow:
+        0 0 10px #ff3b3b,
+        0 0 20px #ff3b3b,
+        0 0 30px #ff0000,
+        0 0 40px #ff0000,
+        0 0 50px #ff0000;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0;
+      white-space: nowrap;
+      animation: pulseGlow 5s forwards;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0; text-shadow:
+        0 0 5px #ff3b3b,
+        0 0 10px #ff3b3b,
+        0 0 15px #ff0000;
+      }
+      25%, 75% {
         opacity: 1;
+        text-shadow:
+          0 0 20px #ff3b3b,
+          0 0 30px #ff3b3b,
+          0 0 40px #ff0000,
+          0 0 60px #ff0000,
+          0 0 80px #ff0000;
       }
       50% {
-        transform: scale(0.4) rotate(15deg);
-        opacity: 0.7;
-      }
-      100% {
-        transform: scale(0) rotate(720deg);
-        opacity: 0;
+        opacity: 1;
+        text-shadow:
+          0 0 40px #ff3b3b,
+          0 0 50px #ff3b3b,
+          0 0 70px #ff0000,
+          0 0 90px #ff0000,
+          0 0 110px #ff0000;
       }
     }
 
-    /* Extra tweak for very small phones */
-    @media (max-width: 360px) {
-      text {
-        font-size: 12vw;
-      }
+    /* Bubbles container */
+    .bubbles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* Each bubble */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+      filter: drop-shadow(0 0 6px rgba(255, 223, 0, 0.6));
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      background: radial-gradient(circle at center, #ffc107 60%, transparent 90%);
+    }
+
+    .bubble.small {
+      width: 20px;
+      height: 20px;
+      animation-name: driftSmall;
+      animation-duration: 12s;
+    }
+    .bubble.medium {
+      width: 40px;
+      height: 40px;
+      animation-name: driftMedium;
+      animation-duration: 18s;
+    }
+    .bubble.large {
+      width: 70px;
+      height: 70px;
+      animation-name: driftLarge;
+      animation-duration: 24s;
+    }
+
+    @keyframes driftSmall {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(15px, -10px); }
+      50% { transform: translate(-10px, 15px); }
+      75% { transform: translate(10px, 10px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes driftMedium {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-20px, 15px); }
+      50% { transform: translate(20px, -15px); }
+      75% { transform: translate(-15px, -10px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes driftLarge {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(25px, 20px); }
+      50% { transform: translate(-25px, -20px); }
+      75% { transform: translate(20px, -15px); }
+      100% { transform: translate(0, 0); }
     }
   </style>
 </head>
 <body>
+  <div class="bubbles">
+    <div class="bubble small" style="top: 15vh; left: 10vw; animation-delay: 0s;"></div>
+    <div class="bubble medium" style="top: 35vh; left: 30vw; animation-delay: 3s;"></div>
+    <div class="bubble large" style="top: 50vh; left: 50vw; animation-delay: 6s;"></div>
+    <div class="bubble small" style="top: 70vh; left: 70vw; animation-delay: 9s;"></div>
+    <div class="bubble medium" style="top: 80vh; left: 85vw; animation-delay: 12s;"></div>
+  </div>
 
-  <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-    <text id="logoText" x="400" y="230" text-anchor="middle">
-      CONNOR
-    </text>
-  </svg>
+  <div class="container">
+    <h1 class="jump-title">
+      <span>2</span><span>0</span><span>2</span><span>6</span>
+    </h1>
 
-  <button id="clickBtn">Click Me</button>
+    <h2 class="batman-mentality">BATMAN'S MENTALITY</h2>
+    <p class="mentality-text">
+      Determined, strategic, and resilient — Batman never gives up. Every challenge is met with a calm mind, sharp instincts, and unwavering dedication to justice.
+    </p>
 
-  <div id="message"></div>
+    <div class="tabs">
+      <button class="tab-button active" data-tab="goals">Goals</button>
+      <button class="tab-button" data-tab="fears">Fears</button>
+      <button class="tab-button" data-tab="rules">Rules</button>
+    </div>
+
+    <div id="goals" class="tab-content">
+      <ul>
+        <li>Read the whole Bible.</li>
+        <li>Get my driver's license.</li>
+        <li>Buy a car.</li>
+        <li>Start Pioneering.</li>
+        <li>Run every day.</li>
+        <li>Pass CompTIA 3 tests</li>
+      </ul>
+    </div>
+
+    <div id="fears" class="tab-content hidden">
+      <p>It’s not who I am underneath, but what I do that defines me.</p>
+      <ul>
+        <li>Fear of the dark.<br><em>I am vengeance, I am the night, I am Batman!</em></li>
+        <li>Fear of thunderstorms.</li>
+        <li>Fear of being around others.</li>
+      </ul>
+    </div>
+
+    <div id="rules" class="tab-content hidden">
+      <ul>
+        <li>Be respectful to everyone mentally.</li>
+        <li>Stay positive and embrace change.</li>
+        <li>Take priority of self-care.</li>
+        <li>Learn something new every day.</li>
+      </ul>
+    </div>
+
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Access denied message container -->
+    <div id="accessDeniedMsg" class="access-denied" aria-live="assertive"></div>
+  </div>
 
   <script>
-    const btn = document.getElementById('clickBtn');
-    const messageDiv = document.getElementById('message');
-    const logoText = document.getElementById('logoText');
+    const buttons = document.querySelectorAll('.tab-button');
+    const contents = document.querySelectorAll('.tab-content');
+    const accessDeniedMsg = document.getElementById('accessDeniedMsg');
 
+<<<<<<< HEAD:index.html
     const fullMessage = `I know I might come off a bit quirky sometimes, but I’m really just hoping to get to know you as a friend. 
 
 I admire fictional characters way more than real humans, so if I come off as quirky, take it as a compliment. I’m planning to be out in service next week, and you’re welcome to join. `;
@@ -155,8 +461,32 @@ I admire fictional characters way more than real humans, so if I come off as qui
     btn.addEventListener('click', () => {
       btn.disabled = true;
       typeMessage(fullMessage);
-    });
-  </script>
+=======
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
 
+        contents.forEach(content => content.classList.add('hidden'));
+        const tab = button.getAttribute('data-tab');
+        document.getElementById(tab).classList.remove('hidden');
+      });
+>>>>>>> 75a5d3a (YH):Batman.html
+    });
+
+    function handleLogin(event) {
+      event.preventDefault();
+
+      accessDeniedMsg.textContent = 'ACCESS DENIED';
+
+      // Reset animation by removing & re-adding the class
+      accessDeniedMsg.style.animation = 'none';
+      void accessDeniedMsg.offsetWidth; // trigger reflow
+      accessDeniedMsg.style.animation = 'pulseGlow 5s forwards';
+
+      // Clear password input
+      document.getElementById('password').value = '';
+    }
+  </script>
 </body>
 </html>
