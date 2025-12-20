@@ -1,360 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Batman Style Tabs: Goals, Fears & Rules</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #0b0c10;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #d4d4d4;
-      height: 100vh;
-      overflow: hidden;
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Batman Style Tabs - 2026</title>
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #0b0c10;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #d4d4d4;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+  }
+  .container {
+    background: #1f2833;
+    padding: 1rem 1rem 0.6rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(255, 223, 0, 0.5);
+    max-width: 360px;
+    width: 100vw;
+    height: 90vh;
+    text-align: center;
+    user-select: none;
+    border: 2px solid #ffc107;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  .jump-title {
+    font-size: 1.7rem;
+    margin: 0 0 0.1rem 0;
+    letter-spacing: 1.1px;
+    font-weight: 700;
+    color: #ffc107;
+    text-shadow: 0 0 5px #ffc107, 0 0 8px #ffeb3b;
+    user-select: none;
+  }
+  .jump-title span {
+    display: inline-block;
+    animation: jump 0.6s ease-in-out infinite;
+    cursor: default;
+  }
+  .jump-title span:nth-child(1) { animation-delay: 0s; }
+  .jump-title span:nth-child(2) { animation-delay: 0.15s; }
+  .jump-title span:nth-child(3) { animation-delay: 0.3s; }
+  .jump-title span:nth-child(4) { animation-delay: 0.45s; }
+  @keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .batman-mentality {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffc107;
+    text-shadow: 0 0 4px #ffc107;
+    letter-spacing: 1px;
+    margin: 0.2rem 0 0.5rem 0;
+    user-select: none;
+  }
+  .mentality-text {
+    color: #c5c6c7;
+    font-weight: 500;
+    font-style: italic;
+    margin: 0 0 1rem 0;
+    line-height: 1.25;
+    letter-spacing: 0.45px;
+    font-size: 0.82rem;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  .tab-button {
+    background: #f4a800;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #1f2833;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(244, 168, 0, 0.6);
+    transition: background-color 0.3s ease;
+    user-select: none;
+    font-weight: 700;
+    flex: 1;
+  }
+  .tab-button:hover {
+    background: #ffca28;
+  }
+  .tab-button.active {
+    background: #ffeb3b;
+    box-shadow: 0 6px 15px rgba(255, 235, 59, 0.9);
+  }
+
+  /* Content container */
+  .tab-content {
+    background: #0c121b;
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    color: #c5c6c7;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    flex-grow: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-content ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .tab-content ul li {
+    margin-bottom: 0.45rem;
+    position: relative;
+  }
+  .tab-content ul li::before {
+    content: "✔";
+    color: #ffc107;
+    position: absolute;
+    left: -1rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    top: 0;
+    line-height: 1;
+  }
+  .tab-content p {
+    margin: 0 0 0.8rem 0;
+    font-style: italic;
+    font-weight: 600;
+  }
+  .hidden {
+    display: none;
+  }
+
+  /* Login form */
+  form.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #c5c6c7;
+    margin-top: 0.6rem;
+  }
+  form.login-form label {
+    font-size: 0.82rem;
+    user-select: none;
+  }
+  form.login-form input[type="text"],
+  form.login-form input[type="password"] {
+    padding: 0.35rem 0.5rem;
+    border: 2px solid #ffc107;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: #1f2833;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #c5c6c7;
+  }
+  form.login-form input[type="text"]:focus,
+  form.login-form input[type="password"]:focus {
+    outline: none;
+    border-color: #ffeb3b;
+    box-shadow: 0 0 5px #ffeb3b;
+    background-color: #fffde7;
+  }
+  form.login-form button {
+    padding: 0.45rem 1.1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 10px;
+    background: #ffc107;
+    color: #1f2833;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(255, 193, 7, 0.7);
+    transition: background-color 0.3s ease;
+    font-weight: 700;
+    margin-top: 0.1rem;
+    width: 100%;
+  }
+  form.login-form button:hover {
+    background: #ffca28;
+  }
+
+  /* ACCESS DENIED message */
+  .access-denied {
+    color: #ff3b3b;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-shadow:
+      0 0 6px #ff3b3b,
+      0 0 10px #ff3b3b,
+      0 0 15px #ff0000,
+      0 0 20px #ff0000;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    margin-top: 0.3rem;
+    height: 1.4rem;
+    opacity: 0;
+    animation: pulseGlow 5s forwards;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0; text-shadow:
+      0 0 3px #ff3b3b,
+      0 0 6px #ff3b3b,
+      0 0 9px #ff0000;
     }
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 0.3rem;
-    }
-
-    .container {
-      position: relative;
-      background: #1f2833;
-      padding: 1rem 1.2rem;
-      border-radius: 10px;
-      box-shadow: 0 6px 15px rgba(255, 223, 0, 0.5);
-      max-width: 360px;
-      width: 100vw;
-      text-align: center;
-      user-select: none;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      border: 2px solid #ffc107;
-      box-sizing: border-box;
-      overflow: visible;
-      max-height: none;
-    }
-
-    .jump-title {
-      font-size: 1.8rem;
-      margin-bottom: 0.2rem;
-      letter-spacing: 1.1px;
-      font-weight: 700;
-      user-select: none;
-      color: #ffc107;
-      text-shadow: 0 0 5px #ffc107, 0 0 8px #ffeb3b;
-    }
-
-    .batman-mentality {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #ffc107;
-      text-shadow: 0 0 4px #ffc107;
-      letter-spacing: 1px;
-      margin: 0 0 0.15rem 0;
-      user-select: none;
-    }
-
-    .mentality-text {
-      color: #c5c6c7;
-      font-weight: 500;
-      font-style: italic;
-      margin-bottom: 0.8rem;
-      line-height: 1.25;
-      letter-spacing: 0.45px;
-      user-select: none;
-      font-size: 0.82rem;
-    }
-
-    .jump-title span {
-      display: inline-block;
-      animation: jump 0.6s ease-in-out infinite;
-      cursor: default;
-    }
-
-    .jump-title span:nth-child(1) { animation-delay: 0s; }
-    .jump-title span:nth-child(2) { animation-delay: 0.15s; }
-    .jump-title span:nth-child(3) { animation-delay: 0.3s; }
-    .jump-title span:nth-child(4) { animation-delay: 0.45s; }
-
-    @keyframes jump {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* Tabs */
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin: 0.7rem 0 1rem;
-      flex-wrap: wrap;
-    }
-
-    .tab-button {
-      background: #ffc107;
-      border: none;
-      padding: 0.4rem 0.9rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: #1f2833;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(255, 193, 7, 0.7);
-      transition: background-color 0.3s ease;
-      user-select: none;
-      font-weight: 600;
-      flex: 1 1 28%;
-      min-width: 65px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .tab-button:hover {
-      background: #ffca28;
-    }
-
-    .tab-button.active {
-      background: #ffb300;
-      box-shadow: 0 6px 12px rgba(255, 193, 7, 0.9);
-    }
-
-    /* Content sections */
-    .tab-content {
-      text-align: left;
-      color: #c5c6c7;
-      font-weight: 600;
-      font-size: 0.85rem;
-      line-height: 1.3;
-      letter-spacing: 0.5px;
-      padding-right: 0.6rem;
-      flex-grow: 1;
-      word-wrap: break-word;
-      max-height: none;
-      overflow: visible;
-      margin-bottom: 0.8rem;
-    }
-
-    .tab-content ul {
-      padding-left: 1.1rem;
-      margin: 0;
-    }
-
-    .tab-content ul li {
-      margin-bottom: 0.5rem;
-      position: relative;
-      font-size: 0.82rem;
-    }
-
-    .tab-content ul li::before {
-      content: "✔";
-      color: #ffc107;
-      position: absolute;
-      left: -1rem;
-      font-weight: bold;
-      font-size: 0.95rem;
-      top: 0;
-      line-height: 1;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* Paragraph style for fears */
-    .tab-content p {
-      font-weight: 600;
-      color: #c5c6c7;
-      margin: 0 0 0.6rem 0;
-      padding-left: 0.3rem;
-      font-style: italic;
-      font-size: 0.85rem;
-    }
-
-    /* Login form */
-    form.login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-top: 0;
-      text-align: left;
-      font-weight: 600;
-      color: #c5c6c7;
-      position: relative;
-      margin-bottom: 0.3rem;
-    }
-
-    form.login-form label {
-      display: block;
-      margin-bottom: 0.15rem;
-      font-size: 0.85rem;
-    }
-
-    form.login-form input[type="text"],
-    form.login-form input[type="password"] {
-      padding: 0.4rem 0.6rem;
-      border: 2px solid #ffc107;
-      border-radius: 7px;
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: #1f2833;
-      transition: border-color 0.3s ease;
-      width: 100%;
-      box-sizing: border-box;
-      background-color: #c5c6c7;
-    }
-
-    form.login-form input[type="text"]:focus,
-    form.login-form input[type="password"]:focus {
-      outline: none;
-      border-color: #ffeb3b;
-      box-shadow: 0 0 5px #ffeb3b;
-      background-color: #fffde7;
-    }
-
-    form.login-form button {
-      align-self: center;
-      padding: 0.45rem 1.1rem;
-      font-size: 0.95rem;
-      border: none;
-      border-radius: 10px;
-      background: #ffc107;
-      color: #1f2833;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(255, 193, 7, 0.7);
-      transition: background-color 0.3s ease;
-      font-weight: 700;
-      margin-top: 0.2rem;
-      width: 100%;
-    }
-
-    form.login-form button:hover {
-      background: #ffca28;
-    }
-
-    /* ACCESS DENIED message */
-    .access-denied {
-      color: #ff3b3b;
-      font-weight: 900;
-      font-size: 1.1rem;
+    25%, 75% {
+      opacity: 1;
       text-shadow:
-        0 0 6px #ff3b3b,
-        0 0 10px #ff3b3b,
-        0 0 15px #ff0000,
-        0 0 20px #ff0000;
-      user-select: none;
-      pointer-events: none;
-      white-space: nowrap;
-      margin-top: 0.2rem;
-      height: 1.4rem;
-      opacity: 0;
-      animation: pulseGlow 5s forwards;
+        0 0 12px #ff3b3b,
+        0 0 18px #ff3b3b,
+        0 0 25px #ff0000,
+        0 0 35px #ff0000,
+        0 0 45px #ff0000;
     }
+    50% {
+      opacity: 1;
+      text-shadow:
+        0 0 25px #ff3b3b,
+        0 0 30px #ff3b3b,
+        0 0 40px #ff0000,
+        0 0 50px #ff0000,
+        0 0 65px #ff0000;
+    }
+  }
 
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0; text-shadow:
-        0 0 3px #ff3b3b,
-        0 0 6px #ff3b3b,
-        0 0 9px #ff0000;
-      }
-      25%, 75% {
-        opacity: 1;
-        text-shadow:
-          0 0 12px #ff3b3b,
-          0 0 18px #ff3b3b,
-          0 0 25px #ff0000,
-          0 0 35px #ff0000,
-          0 0 45px #ff0000;
-      }
-      50% {
-        opacity: 1;
-        text-shadow:
-          0 0 25px #ff3b3b,
-          0 0 30px #ff3b3b,
-          0 0 40px #ff0000,
-          0 0 50px #ff0000,
-          0 0 65px #ff0000;
-      }
-    }
-
-    /* Bubbles container */
-    .bubbles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      overflow: visible;
-      z-index: 1;
-    }
-
-    /* Each bubble */
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.5;
-      filter: drop-shadow(0 0 5px rgba(255, 223, 0, 0.5));
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      background: radial-gradient(circle at center, #ffc107 60%, transparent 90%);
-    }
-
-    .bubble.small {
-      width: 12px;
-      height: 12px;
-      animation-name: driftSmall;
-      animation-duration: 10s;
-    }
-    .bubble.medium {
-      width: 22px;
-      height: 22px;
-      animation-name: driftMedium;
-      animation-duration: 15s;
-    }
-    .bubble.large {
-      width: 40px;
-      height: 40px;
-      animation-name: driftLarge;
-      animation-duration: 20s;
-    }
-
-    @keyframes driftSmall {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(10px, -7px); }
-      50% { transform: translate(-7px, 10px); }
-      75% { transform: translate(7px, 7px); }
-      100% { transform: translate(0, 0); }
-    }
-
-    @keyframes driftMedium {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(-12px, 9px); }
-      50% { transform: translate(12px, -9px); }
-      75% { transform: translate(-9px, -7px); }
-      100% { transform: translate(0, 0); }
-    }
-
-    @keyframes driftLarge {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(15px, 12px); }
-      50% { transform: translate(-15px, -12px); }
-      75% { transform: translate(12px, -9px); }
-      100% { transform: translate(0, 0); }
-    }
-  </style>
+  /* Bubbles container */
+  .bubbles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 1;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 5px rgba(255, 223, 0, 0.5));
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    background: radial-gradient(circle at center, #ffc107 60%, transparent 90%);
+  }
+  .bubble.small {
+    width: 12px; height: 12px;
+    animation-name: driftSmall;
+    animation-duration: 10s;
+  }
+  .bubble.medium {
+    width: 22px; height: 22px;
+    animation-name: driftMedium;
+    animation-duration: 15s;
+  }
+  .bubble.large {
+    width: 40px; height: 40px;
+    animation-name: driftLarge;
+    animation-duration: 20s;
+  }
+  @keyframes driftSmall {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(10px, -7px); }
+    50% { transform: translate(-7px, 10px); }
+    75% { transform: translate(7px, 7px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes driftMedium {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-12px, 9px); }
+    50% { transform: translate(12px, -9px); }
+    75% { transform: translate(-9px, -7px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes driftLarge {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(15px, 12px); }
+    50% { transform: translate(-15px, -12px); }
+    75% { transform: translate(12px, -9px); }
+    100% { transform: translate(0, 0); }
+  }
+</style>
 </head>
 <body>
-  <div class="bubbles">
+  <div class="bubbles" aria-hidden="true">
     <div class="bubble small" style="top: 12vh; left: 8vw; animation-delay: 0s;"></div>
     <div class="bubble medium" style="top: 30vh; left: 28vw; animation-delay: 2s;"></div>
     <div class="bubble large" style="top: 45vh; left: 50vw; animation-delay: 5s;"></div>
@@ -362,23 +307,23 @@
     <div class="bubble medium" style="top: 78vh; left: 82vw; animation-delay: 10s;"></div>
   </div>
 
-  <div class="container">
-    <h1 class="jump-title">
+  <div class="container" role="main">
+    <h1 class="jump-title" aria-label="2026">
       <span>2</span><span>0</span><span>2</span><span>6</span>
     </h1>
 
-    <h2 class="batman-mentality">BATMAN'S MENTALITY</h2>
-    <p class="mentality-text">
+    <h2 class="batman-mentality" id="batman-mentality-title">BATMAN'S MENTALITY</h2>
+    <p class="mentality-text" id="batman-mentality-desc">
       Determined, strategic, and resilient — Batman never gives up. Every challenge is met with a calm mind, sharp instincts, and unwavering dedication to justice.
     </p>
 
-    <div class="tabs">
-      <button class="tab-button active" data-tab="goals">Goals</button>
-      <button class="tab-button" data-tab="fears">Fears</button>
-      <button class="tab-button" data-tab="rules">Rules</button>
-    </div>
+    <nav class="tabs" role="tablist" aria-label="Select category">
+      <button class="tab-button active" data-tab="goals" role="tab" aria-selected="true" aria-controls="goals" id="tab-goals">Goals</button>
+      <button class="tab-button" data-tab="fears" role="tab" aria-selected="false" aria-controls="fears" id="tab-fears">Fears</button>
+      <button class="tab-button" data-tab="rules" role="tab" aria-selected="false" aria-controls="rules" id="tab-rules">Rules</button>
+    </nav>
 
-    <div id="goals" class="tab-content">
+    <section id="goals" class="tab-content" role="tabpanel" aria-labelledby="tab-goals">
       <ul>
         <li>Read the whole Bible.</li>
         <li>Get my driver's license.</li>
@@ -387,68 +332,70 @@
         <li>Run every day.</li>
         <li>Pass CompTIA 3 tests</li>
       </ul>
-    </div>
+    </section>
 
-    <div id="fears" class="tab-content hidden">
+    <section id="fears" class="tab-content hidden" role="tabpanel" aria-labelledby="tab-fears">
       <p>It’s not who I am underneath, but what I do that defines me.</p>
       <ul>
-        <li>Fear of the dark.<br><em>I am vengeance, I am the night, I am Batman!</em></li>
+        <li>Fear of the dark. <br><em>I am vengeance, I am the night, I am Batman!</em></li>
         <li>Fear of thunderstorms.</li>
         <li>Fear of being around others.</li>
       </ul>
-    </div>
+    </section>
 
-    <div id="rules" class="tab-content hidden">
+    <section id="rules" class="tab-content hidden" role="tabpanel" aria-labelledby="tab-rules">
       <ul>
         <li>Be respectful to everyone mentally.</li>
         <li>Stay positive and embrace change.</li>
         <li>Take priority of self-care.</li>
         <li>Learn something new every day.</li>
       </ul>
-    </div>
+    </section>
 
-    <form class="login-form" onsubmit="handleLogin(event)">
+    <form class="login-form" onsubmit="handleLogin(event)" aria-label="Login form">
       <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter username" required />
+      <input type="text" id="username" placeholder="Enter username" required autocomplete="username" />
 
       <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter password" required />
+      <input type="password" id="password" placeholder="Enter password" required autocomplete="current-password" />
 
       <button type="submit">Login</button>
     </form>
 
-    <div id="accessDeniedMsg" class="access-denied" aria-live="assertive"></div>
+    <div id="accessDeniedMsg" class="access-denied" aria-live="assertive" role="alert"></div>
   </div>
 
-  <script>
-    const buttons = document.querySelectorAll('.tab-button');
-    const contents = document.querySelectorAll('.tab-content');
-    const accessDeniedMsg = document.getElementById('accessDeniedMsg');
+<script>
+  const buttons = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+  const accessDeniedMsg = document.getElementById('accessDeniedMsg');
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        contents.forEach(content => content.classList.add('hidden'));
-        const tab = button.getAttribute('data-tab');
-        document.getElementById(tab).classList.remove('hidden');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
       });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      contents.forEach(content => content.classList.add('hidden'));
+      const tab = button.getAttribute('data-tab');
+      document.getElementById(tab).classList.remove('hidden');
     });
+  });
 
-    function handleLogin(event) {
-      event.preventDefault();
+  function handleLogin(event) {
+    event.preventDefault();
 
-      accessDeniedMsg.textContent = 'ACCESS DENIED';
+    accessDeniedMsg.textContent = 'ACCESS DENIED';
 
-      // Reset animation by removing & re-adding the class
-      accessDeniedMsg.style.animation = 'none';
-      void accessDeniedMsg.offsetWidth; // trigger reflow
-      accessDeniedMsg.style.animation = 'pulseGlow 5s forwards';
+    accessDeniedMsg.style.animation = 'none';
+    void accessDeniedMsg.offsetWidth; // trigger reflow
+    accessDeniedMsg.style.animation = 'pulseGlow 5s forwards';
 
-      // Clear password input
-      document.getElementById('password').value = '';
-    }
-  </script>
+    document.getElementById('password').value = '';
+  }
+</script>
 </body>
 </html>
