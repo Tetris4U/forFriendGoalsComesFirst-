@@ -438,46 +438,6 @@
     const contents = document.querySelectorAll('.tab-content');
     const accessDeniedMsg = document.getElementById('accessDeniedMsg');
 
-<<<<<<< HEAD:index.html
-    const fullMessage = `I know I might come off a bit quirky sometimes, but I’m really just hoping to get to know you as a friend. 
-
-I admire fictional characters way more than real humans, so if I come off as quirky, take it as a compliment. I’m planning to be out in service next week, and you’re welcome to join. `;
-
-    function typeMessage(text, speed = 30) {
-      let index = 0;
-      messageDiv.textContent = '';
-      messageDiv.classList.remove('ball-up');
-
-      const interval = setInterval(() => {
-        messageDiv.textContent += text.charAt(index);
-        index++;
-        if (index >= text.length) {
-          clearInterval(interval);
-          setTimeout(() => {
-            messageDiv.classList.add('ball-up');
-            setTimeout(() => {
-              messageDiv.textContent = '';
-              messageDiv.classList.remove('ball-up');
-              fadeChangeText('FROM BATGIRL');
-              btn.disabled = false;
-            }, 600);
-          }, 1200);
-        }
-      }, speed);
-    }
-
-    function fadeChangeText(newText) {
-      logoText.style.opacity = '0';
-      setTimeout(() => {
-        logoText.textContent = newText;
-        logoText.style.opacity = '1';
-      }, 600);
-    }
-
-    btn.addEventListener('click', () => {
-      btn.disabled = true;
-      typeMessage(fullMessage);
-=======
     buttons.forEach(button => {
       button.addEventListener('click', () => {
         buttons.forEach(btn => btn.classList.remove('active'));
@@ -487,7 +447,6 @@ I admire fictional characters way more than real humans, so if I come off as qui
         const tab = button.getAttribute('data-tab');
         document.getElementById(tab).classList.remove('hidden');
       });
->>>>>>> 75a5d3a (YH):Batman.html
     });
 
     function handleLogin(event) {
